@@ -1,8 +1,12 @@
 package Exams;
 //created by J.M.
+
 import java.util.*;
+
 public class Bee {
+
     static int beeRow, beeCol;
+
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
@@ -15,35 +19,30 @@ public class Bee {
 
         while (!"End".equals(input = scan.nextLine())) {
             matrix[beeRow][beeCol] = '.';
-            switch (input) {
-                case "right":
+            if ("right".equals(input)) {
+                beeCol++;
+                while (indexesInBounds(matrix) && matrix[beeRow][beeCol] == 'O') {
+                    matrix[beeRow][beeCol] = '.';
                     beeCol++;
-                    while (indexesInBounds(matrix) && matrix[beeRow][beeCol] == 'O') {
-                        matrix[beeRow][beeCol] = '.';
-                        beeCol++;
-                    }
-                    break;
-                case "left":
+                }
+            } else if ("left".equals(input)) {
+                beeCol--;
+                while (indexesInBounds(matrix) && matrix[beeRow][beeCol] == 'O') {
+                    matrix[beeRow][beeCol] = '.';
                     beeCol--;
-                    while (indexesInBounds(matrix) && matrix[beeRow][beeCol] == 'O') {
-                        matrix[beeRow][beeCol] = '.';
-                        beeCol--;
-                    }
-                    break;
-                case "down":
+                }
+            } else if ("down".equals(input)) {
+                beeRow++;
+                while (indexesInBounds(matrix) && matrix[beeRow][beeCol] == 'O') {
+                    matrix[beeRow][beeCol] = '.';
                     beeRow++;
-                    while (indexesInBounds(matrix) && matrix[beeRow][beeCol] == 'O') {
-                        matrix[beeRow][beeCol] = '.';
-                        beeRow++;
-                    }
-                    break;
-                case "up":
+                }
+            } else if ("up".equals(input)) {
+                beeRow--;
+                while (indexesInBounds(matrix) && matrix[beeRow][beeCol] == 'O') {
+                    matrix[beeRow][beeCol] = '.';
                     beeRow--;
-                    while (indexesInBounds(matrix) && matrix[beeRow][beeCol] == 'O') {
-                        matrix[beeRow][beeCol] = '.';
-                        beeRow--;
-                    }
-                    break;
+                }
             }
             if (indexesInBounds(matrix)) {
                 if (matrix[beeRow][beeCol] == 'f') {
@@ -62,9 +61,11 @@ public class Bee {
         }
         printMatrix(matrix);
     }
+
     private static boolean indexesInBounds(char[][] matrix) {
         return (beeRow >= 0 && beeRow < matrix.length) && (beeCol >= 0 && beeCol < matrix[beeRow].length);
     }
+
     private static int[] findBeeIndexes(char[][] matrix) {
         int[] startBeeIndexes = new int[2];
         for (int row = 0; row < matrix.length; row++) {
@@ -77,6 +78,7 @@ public class Bee {
         }
         return startBeeIndexes;
     }
+
     private static char[][] readMatrix(Scanner scan) {
         int n = Integer.parseInt(scan.nextLine());
         char[][] matrix = new char[n][n];
@@ -85,6 +87,7 @@ public class Bee {
         }
         return matrix;
     }
+
     private static void printMatrix(char[][] matrix) {
         Arrays.stream(matrix).map(row -> Arrays.toString(row).replaceAll("[\\[\\]]", "")
                 .replaceAll(", ", "")).forEach(System.out::println);
