@@ -18,19 +18,15 @@ public class Bombs {
         while (!effects.isEmpty() && !casings.isEmpty() && (countCherry < 3 || countSmoke < 3 || countDatura < 3)) {
             int currentEffects = effects.poll();
             int currentCasings = casings.pop();
-            switch (currentEffects + currentCasings) {
-                case 40:
-                    countDatura++;
-                    break;
-                case 60:
-                    countCherry++;
-                    break;
-                case 120:
-                    countSmoke++;
-                    break;
-                default:
-                    casings.push(currentCasings - 5);
-                    effects.offerFirst(currentEffects);
+            if (currentEffects + currentCasings == 40) {
+                countDatura++;
+            } else if (currentEffects + currentCasings == 60) {
+                countCherry++;
+            } else if (currentEffects + currentCasings == 120) {
+                countSmoke++;
+            } else {
+                casings.push(currentCasings - 5);
+                effects.offerFirst(currentEffects);
             }
         }
         if (countCherry >= 3 && countSmoke >= 3 && countDatura >= 3) {
