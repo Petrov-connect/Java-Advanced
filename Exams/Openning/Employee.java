@@ -1,4 +1,4 @@
-package Openning.bakery;
+package Exams.Openning;
 //created by J.M.
 
 public class Employee {
