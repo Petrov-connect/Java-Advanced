@@ -14,9 +14,12 @@ public class Selling {
         readMatrix(scan, Integer.parseInt(scan.nextLine()));
         indexes = findIndexes('S');
         int money = 0;
+
         while (money < 50 && isInBounds()) {
+
             String input = scan.nextLine();
             setPosition('-');
+
             if ("up".equals(input)) {
                 indexes[0]--;
             } else if ("down".equals(input)) {
@@ -28,9 +31,12 @@ public class Selling {
             }
             if (isInBounds()) {
                 if (matrix[indexes[0]][indexes[1]] == 'O') {
+
                     setPosition('-');
                     indexes = findIndexes('O');
+
                 } else if (Character.isDigit(matrix[indexes[0]][indexes[1]])) {
+
                     money += Integer.parseInt(String.valueOf(matrix[indexes[0]][indexes[1]]));
                 }
                 setPosition('S');
@@ -41,8 +47,10 @@ public class Selling {
         } else {
             System.out.println("Bad news, you are out of the bakery.");
         }
+
         System.out.println("Money: " + money);
         printMatrix();
+
     }
 
     private static void printMatrix() {
