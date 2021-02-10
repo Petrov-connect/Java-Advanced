@@ -6,13 +6,13 @@ import java.util.*;
 public class Selling {
 
     private static char[][] matrix;
-    private static int[] indexes;
+    private static final int[] indexes= new int[2];
 
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
         readMatrix(scan, Integer.parseInt(scan.nextLine()));
-        indexes = findIndexes('S');
+        findIndexes('S');
         int money = 0;
 
         while (money < 50 && isInBounds()) {
@@ -30,12 +30,12 @@ public class Selling {
                 indexes[1]++;
             }
             if (isInBounds()) {
-                if (matrix[indexes[0]][indexes[1]] == 'O') {
+                if (checkPosition() == 'O') {
 
                     setPosition('-');
-                    indexes = findIndexes('O');
+                    findIndexes('O');
 
-                } else if (Character.isDigit(matrix[indexes[0]][indexes[1]])) {
+                } else if (Character.isDigit(checkPosition())) {
 
                     money += Integer.parseInt(String.valueOf(matrix[indexes[0]][indexes[1]]));
                 }
@@ -51,6 +51,10 @@ public class Selling {
         System.out.println("Money: " + money);
         printMatrix();
 
+    }
+
+    private static char checkPosition() {
+        return matrix[indexes[0]][indexes[1]];
     }
 
     private static void printMatrix() {
@@ -73,8 +77,7 @@ public class Selling {
         matrix[indexes[0]][indexes[1]] = toSet;
     }
 
-    private static int[] findIndexes(char toFind) {
-        int[] indexes = new int[2];
+    private static void findIndexes(char toFind) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 if (matrix[i][j] == toFind) {
@@ -83,6 +86,5 @@ public class Selling {
                 }
             }
         }
-        return indexes;
     }
 }
