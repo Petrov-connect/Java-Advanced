@@ -29,15 +29,15 @@ public class TheGarden {
             if (command[0].equals("Harvest")) {
                 checkVegetable(row, col);
             } else {
-                if (chekIndexes(row, col)) {
+                if (isValidIndexes(row, col)) {
                     if ("up".equals(command[3])) {
-                        moveTo(row, col, -2, "rows");
+                        moveToNext(row, col, -2, "rows");
                     } else if ("down".equals(command[3])) {
-                        moveTo(row, col, 2, "rows");
+                        moveToNext(row, col, 2, "rows");
                     } else if ("left".equals(command[3])) {
-                        moveTo(row, col, -2, "cols");
+                        moveToNext(row, col, -2, "cols");
                     } else if ("right".equals(command[3])) {
-                        moveTo(row, col, 2, "cols");
+                        moveToNext(row, col, 2, "cols");
                     }
                 }
             }
@@ -48,8 +48,8 @@ public class TheGarden {
 
     }
 
-    private static void moveTo(int row, int col, int index, String direction) {
-        while (chekIndexes(row, col)) {
+    private static void moveToNext(int row, int col, int index, String direction) {
+        while (isValidIndexes(row, col)) {
             checkCell(row, col);
             if (direction.equals("rows")) {
                 row = Math.abs(row) + index;
@@ -67,7 +67,7 @@ public class TheGarden {
     }
 
     private static void checkVegetable(int row, int col) {
-        if (chekIndexes(row, col)) {
+        if (isValidIndexes(row, col)) {
             char current = matrix[row][col];
             if (current == 'L') {
                 vegetables.put("Lettuce", vegetables.get("Lettuce") + 1);
@@ -80,7 +80,7 @@ public class TheGarden {
         }
     }
 
-    private static boolean chekIndexes(int row, int col) {
+    private static boolean isValidIndexes(int row, int col) {
         return (row >= 0 && row < matrix.length) && (col >= 0 && col < matrix[row].length);
     }
 
