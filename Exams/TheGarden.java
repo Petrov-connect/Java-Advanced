@@ -12,8 +12,12 @@ public class TheGarden {
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
-        matrix = readMatrix(scan, Integer.parseInt(scan.nextLine()));
-        vegetables = new LinkedHashMap<>() {{ put("Carrots", 0); put("Potatoes", 0); put("Lettuce", 0); }};
+        readMatrix(scan, Integer.parseInt(scan.nextLine()));
+        vegetables = new LinkedHashMap<>() {{
+            put("Carrots", 0);
+            put("Potatoes",0);
+            put("Lettuce", 0);
+        }};
         String input;
         int row, col;
 
@@ -21,6 +25,7 @@ public class TheGarden {
             String[] command = input.split("\\s+");
             row = Integer.parseInt(command[1]);
             col = Integer.parseInt(command[2]);
+
             if (command[0].equals("Harvest")) {
                 checkVegetable(row, col);
             } else {
@@ -79,13 +84,11 @@ public class TheGarden {
         return (row >= 0 && row < matrix.length) && (col >= 0 && col < matrix[row].length);
     }
 
-    private static char[][] readMatrix(Scanner scan, int n) {
-        char[][] matrix = new char[n][];
+    private static void readMatrix(Scanner scan, int n) {
+        matrix = new char[n][];
         for (int row = 0; row < n; row++) {
-            matrix[row] = scan.nextLine()
-                    .replaceAll("\\s+", "").toCharArray();
+            matrix[row] = scan.nextLine().replaceAll("\\s+", "").toCharArray();
         }
-        return matrix;
     }
 
     private static void printMatrix() {
