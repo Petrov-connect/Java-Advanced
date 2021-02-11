@@ -16,6 +16,7 @@ public class TheGarden {
         vegetables = new LinkedHashMap<>() {{ put("Carrots", 0); put("Potatoes", 0); put("Lettuce", 0); }};
         String input;
         int row, col;
+
         while (!"End of Harvest".equals(input = scan.nextLine())) {
             String[] command = input.split("\\s+");
             row = Integer.parseInt(command[1]);
