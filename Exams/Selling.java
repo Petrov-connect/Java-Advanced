@@ -6,7 +6,7 @@ import java.util.*;
 public class Selling {
 
     private static char[][] matrix;
-    private static final int[] indexes= new int[2];
+    private static final int[] indexes = new int[2];
 
     public static void main(String[] args) {
 
@@ -42,12 +42,10 @@ public class Selling {
                 setPosition('S');
             }
         }
-        if (isInBounds()) {
-            System.out.println("Good news! You succeeded in collecting enough money!");
-        } else {
-            System.out.println("Bad news, you are out of the bakery.");
-        }
 
+        System.out.println(isInBounds()
+                ? "Good news! You succeeded in collecting enough money!"
+                : "Bad news, you are out of the bakery.");
         System.out.println("Money: " + money);
         printMatrix();
 
