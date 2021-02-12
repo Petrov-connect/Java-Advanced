@@ -76,12 +76,18 @@ public class Selling {
     }
 
     private static void findIndexes(char toFind) {
+        boolean isFind = false;
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 if (matrix[i][j] == toFind) {
                     indexes[0] = i;
                     indexes[1] = j;
+                    isFind = true;
+                    break;
                 }
+            }
+            if (isFind) {
+                break;
             }
         }
     }
