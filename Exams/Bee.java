@@ -6,45 +6,38 @@ import java.util.*;
 public class Bee {
 
     static int beeRow, beeCol;
+    static char[][] matrix;
 
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
-        char[][] matrix = readMatrix(scan);
-        int[] beeIndexes = findBeeIndexes(matrix);
-        beeRow = beeIndexes[0];
-        beeCol = beeIndexes[1];
+        readMatrix(scan);
         int neededFlowers = 0;
         String input;
 
         while (!"End".equals(input = scan.nextLine())) {
+
             matrix[beeRow][beeCol] = '.';
-            if ("right".equals(input)) {
-                beeCol++;
-                while (indexesInBounds(matrix) && matrix[beeRow][beeCol] == 'O') {
-                    matrix[beeRow][beeCol] = '.';
+
+            switch (input) {
+                case "right":
                     beeCol++;
-                }
-            } else if ("left".equals(input)) {
-                beeCol--;
-                while (indexesInBounds(matrix) && matrix[beeRow][beeCol] == 'O') {
-                    matrix[beeRow][beeCol] = '.';
+                    checkForBonus(1, "col");
+                    break;
+                case "left":
                     beeCol--;
-                }
-            } else if ("down".equals(input)) {
-                beeRow++;
-                while (indexesInBounds(matrix) && matrix[beeRow][beeCol] == 'O') {
-                    matrix[beeRow][beeCol] = '.';
+                    checkForBonus(-1, "col");
+                    break;
+                case "down":
                     beeRow++;
-                }
-            } else if ("up".equals(input)) {
-                beeRow--;
-                while (indexesInBounds(matrix) && matrix[beeRow][beeCol] == 'O') {
-                    matrix[beeRow][beeCol] = '.';
+                    checkForBonus(1, "row");
+                    break;
+                case "up":
                     beeRow--;
-                }
+                    checkForBonus(-1, "row");
+                    break;
             }
-            if (indexesInBounds(matrix)) {
+            if (indexesInBounds()) {
                 if (matrix[beeRow][beeCol] == 'f') {
                     neededFlowers++;
                 }
@@ -59,36 +52,38 @@ public class Bee {
         } else {
             System.out.printf("Great job, the bee manage to pollinate %d flowers!%n", neededFlowers);
         }
-        printMatrix(matrix);
+        printMatrix();
     }
 
-    private static boolean indexesInBounds(char[][] matrix) {
+    private static void checkForBonus(int i, String dir) {
+        while (indexesInBounds() && matrix[beeRow][beeCol] == 'O') {
+            matrix[beeRow][beeCol] = '.';
+            if (dir.equals("col")) {
+                beeCol = Math.abs(beeCol) + i;
+            } else {
+                beeRow = Math.abs(beeRow) + i;
+            }
+        }
+    }
+
+    private static boolean indexesInBounds() {
         return (beeRow >= 0 && beeRow < matrix.length) && (beeCol >= 0 && beeCol < matrix[beeRow].length);
     }
 
-    private static int[] findBeeIndexes(char[][] matrix) {
-        int[] startBeeIndexes = new int[2];
+    private static void readMatrix(Scanner scan) {
+        int n = Integer.parseInt(scan.nextLine());
+        matrix = new char[n][n];
         for (int row = 0; row < matrix.length; row++) {
-            for (int col = 0; col < matrix[row].length; col++) {
-                if (matrix[row][col] == 'B') {
-                    startBeeIndexes[0] = row;
-                    startBeeIndexes[1] = col;
-                }
+            String input = scan.nextLine();
+            matrix[row] = input.toCharArray();
+            if (input.contains("B")) {
+                beeRow = row;
+                beeCol = input.indexOf('B');
             }
         }
-        return startBeeIndexes;
     }
 
-    private static char[][] readMatrix(Scanner scan) {
-        int n = Integer.parseInt(scan.nextLine());
-        char[][] matrix = new char[n][n];
-        for (int row = 0; row < matrix.length; row++) {
-            matrix[row] = scan.nextLine().replaceAll("\\s+", "").toCharArray();
-        }
-        return matrix;
-    }
-
-    private static void printMatrix(char[][] matrix) {
+    private static void printMatrix() {
         Arrays.stream(matrix).map(row -> Arrays.toString(row).replaceAll("[\\[\\]]", "")
                 .replaceAll(", ", "")).forEach(System.out::println);
     }
