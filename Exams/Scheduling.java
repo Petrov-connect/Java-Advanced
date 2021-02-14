@@ -16,8 +16,7 @@ public class Scheduling {
         int stop = Integer.parseInt(scan.nextLine());
 
         while (!tasks.isEmpty() && !threads.isEmpty() && tasks.peek() != stop) {
-            int threadsValue = threads.poll();
-            int tasksValue = tasks.pop();
+            int threadsValue = threads.poll() , tasksValue = tasks.pop();
             if (threadsValue < tasksValue) {
                 tasks.push(tasksValue);
             }
