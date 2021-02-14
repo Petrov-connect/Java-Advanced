@@ -19,7 +19,7 @@ public class Book implements Comparable<Book>{
     @Override
     public int compareTo(Book other) {
         int result = this.title.compareTo(other.title);
-        return result!=0 ? result : Integer.compare(this.year,other.year);
+        return result !=0 ? result : Integer.compare(this.year,other.year);
     }
 
     private void setTitle(String title) {
@@ -42,11 +42,4 @@ public class Book implements Comparable<Book>{
         return year;
     }
 
-    public List<String> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<String> authors) {
-        this.authors = authors;
-    }
 }
