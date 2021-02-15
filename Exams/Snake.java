@@ -41,7 +41,6 @@ public class Snake {
                 break;
             }
         }
-
         if (countOfFood < 10) {
             System.out.println("Game over!");
         } else {
@@ -74,8 +73,7 @@ public class Snake {
     private static char[][] readMatrix(Scanner scan, int n) {
         char[][] matrix = new char[n][n];
         for (int row = 0; row < matrix.length; row++) {
-            matrix[row] = scan.nextLine()
-                    .replaceAll("\\s+", "").toCharArray();
+            matrix[row] = scan.nextLine().replaceAll("\\s+", "").toCharArray();
         }
         return matrix;
     }
