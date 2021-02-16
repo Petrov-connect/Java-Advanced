@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -32,14 +33,34 @@ public class Main {
         sb.append(String.format("Sets to take (%d):%n", chosenSets.size()));
         for (int[] set : chosenSets) {
             sb.append("{ ");
-            sb.append(Arrays.toString(set).replaceAll("\\[|]", ""));
+            sb.append(Arrays.toString(set).replaceAll("[\\[\\]]", ""));
             sb.append(" }").append(System.lineSeparator());
         }
         System.out.println(sb);
     }
 
     public static List<int[]> chooseSets(List<int[]> sets, int[] universe) {
-
-        return null;
+        List<int[]> selectedSet = new ArrayList<>();
+        Set<Integer> universeSet = Arrays.stream(universe).boxed()
+                .collect(Collectors.toCollection(HashSet::new));
+        while (!universeSet.isEmpty() && !sets.isEmpty()) {
+            int notChosenCount = 0;
+            int[] chosenSet = sets.get(0);
+            for (int[] set : sets) {
+                int count = 0;
+                for (int element : set) {
+                    if (universeSet.contains(element)) {
+                        count++;
+                    }
+                }
+                if (notChosenCount < count) {
+                    notChosenCount = count;
+                    chosenSet = set;
+                }
+            }
+            selectedSet.add(chosenSet);
+            Arrays.stream(chosenSet).forEach(universeSet::remove);
+        }
+        return selectedSet;
     }
 }
