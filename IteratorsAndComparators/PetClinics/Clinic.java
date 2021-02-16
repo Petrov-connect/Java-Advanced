@@ -19,10 +19,34 @@ public class Clinic implements Iterable<Pet> {
         }
         this.rooms = new Pet[countRooms];
     }
+    public Pet[] getRooms() { return rooms; }
+
+    public boolean hasEmptyRooms() {
+        return Arrays.stream(this.rooms).anyMatch(Objects::isNull);
+    }
+
+    public void print(int room) {
+        System.out.println(this.rooms[room - 1] == null ? "Room empty" : rooms[room - 1].toString());
+    }
+    @Override
+    public Iterator<Pet> iterator() {
+        return new Iterator<>() {
+            int index = 0;
+            @Override
+            public boolean hasNext() {
+                return index < rooms.length;
+            }
+            @Override
+            public Pet next() {
+                return rooms[index++];
+            }
+        };
+    }
 
     public boolean addPet(Pet pet) {
         int room = this.rooms.length / 2;
-        for (int i = 0; i < this.rooms.length; i++) {
+        int i = 0;
+        while (i < this.rooms.length) {
             if (i % 2 == 0) {
                 room += i;
             } else {
@@ -32,53 +56,31 @@ public class Clinic implements Iterable<Pet> {
                 this.rooms[room] = pet;
                 return true;
             }
+            i++;
         }
         return false;
     }
 
     public boolean release() {
         int start = this.rooms.length / 2;
-        for (int i = start; i < this.rooms.length; i++) {
-            if (this.rooms[i] != null) {
-                this.rooms[i] = null;
-                return true;
+        {
+            int i = start;
+            while (i < this.rooms.length) {
+                if (this.rooms[i] != null) {
+                    this.rooms[i] = null;
+                    return true;
+                }
+                i++;
             }
         }
-        for (int i = 0; i < start; i++) {
+        int i = 0;
+        while (i < start) {
             if (this.rooms[i] != null) {
                 this.rooms[i] = null;
                 return true;
             }
+            i++;
         }
         return false;
-    }
-
-    public boolean hasEmptyRooms() {
-        return Arrays.stream(this.rooms).anyMatch(Objects::isNull);
-    }
-
-    public void print(int room) {
-        System.out.println(this.rooms[room - 1] == null ? "Room empty" : rooms[room - 1].toString());
-    }
-
-    @Override
-    public Iterator<Pet> iterator() {
-        return new Iterator<>() {
-            int index = 0;
-
-            @Override
-            public boolean hasNext() {
-                return index < rooms.length;
-            }
-
-            @Override
-            public Pet next() {
-                return rooms[index++];
-            }
-        };
-    }
-
-    public Pet[] getRooms() {
-        return rooms;
     }
 }
