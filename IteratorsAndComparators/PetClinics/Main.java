@@ -22,7 +22,7 @@ public class Main {
                         pets.putIfAbsent(command[2], new Pet(command[2], Integer.parseInt(command[3]), command[4]));
                     } else {
                        try {
-                           clinics.putIfAbsent(command[2], new Clinic(command[2], Integer.parseInt(command[3])));
+                           clinics.putIfAbsent(command[2], new Clinic(Integer.parseInt(command[3])));
                        }catch (IllegalArgumentException ex){
                            System.out.println(ex.getMessage());
                        }

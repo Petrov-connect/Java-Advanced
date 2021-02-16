@@ -7,11 +7,9 @@ import java.util.Objects;
 
 public class Clinic implements Iterable<Pet> {
 
-    private final String name;
     private Pet[] rooms;
 
-    public Clinic(String name, int countRooms) {
-        this.name = name;
+    public Clinic(int countRooms) {
         chek(countRooms);
     }
 
