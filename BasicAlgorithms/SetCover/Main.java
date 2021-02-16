@@ -12,11 +12,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String[] elements = reader.readLine().substring(10).split(", ");
-        int[] universe = new int[elements.length];
-        for (int i = 0; i < elements.length; i++) {
-            universe[i] = Integer.parseInt(elements[i]);
-        }
+        int[] universe = Arrays.stream(reader.readLine().substring(10).split(", ")).mapToInt(Integer::parseInt).toArray();
         int numberOfSets = Integer.parseInt(reader.readLine().substring(16));
         List<int[]> sets = new ArrayList<>();
         for (int i = 0; i < numberOfSets; i++) {
@@ -29,20 +25,21 @@ public class Main {
         }
         List<int[]> chosenSets = chooseSets(sets, universe);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Sets to take (%d):%n", chosenSets.size()));
+        StringBuilder output = new StringBuilder();
+        output.append(String.format("Sets to take (%d):%n", chosenSets.size()));
         for (int[] set : chosenSets) {
-            sb.append("{ ");
-            sb.append(Arrays.toString(set).replaceAll("[\\[\\]]", ""));
-            sb.append(" }").append(System.lineSeparator());
+            output.append("{ ");
+            output.append(Arrays.toString(set).replaceAll("[\\[\\]]", ""));
+            output.append(" }").append(System.lineSeparator());
         }
-        System.out.println(sb);
+        System.out.println(output);
     }
 
     public static List<int[]> chooseSets(List<int[]> sets, int[] universe) {
+
         List<int[]> selectedSet = new ArrayList<>();
-        Set<Integer> universeSet = Arrays.stream(universe).boxed()
-                .collect(Collectors.toCollection(HashSet::new));
+        Set<Integer> universeSet = Arrays.stream(universe).boxed().collect(Collectors.toCollection(HashSet::new));
+
         while (!universeSet.isEmpty() && !sets.isEmpty()) {
             int notChosenCount = 0;
             int[] chosenSet = sets.get(0);
