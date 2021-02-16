@@ -66,8 +66,7 @@ public class BookWorm {
         return index < field.length && index >= 0;
     }
     private static void printField() {
-        Arrays.stream(field).map(row -> Arrays.toString(row).replaceAll("[\\[\\]]", "")
-                .replaceAll(", ", "")).forEach(System.out::println);
+        Arrays.stream(field).map(row -> Arrays.toString(row).replaceAll("[\\[\\], ]", "")).forEach(System.out::println);
     }
     private static void readField(Scanner scan, int n) {
         field = new char[n][n];
