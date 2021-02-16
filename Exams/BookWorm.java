@@ -2,7 +2,6 @@ package Exams;
 //created by J.M.
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class BookWorm {
 
@@ -15,7 +14,6 @@ public class BookWorm {
         Scanner scan = new Scanner(System.in);
         StringBuilder input = new StringBuilder(scan.nextLine());
         readField(scan, Integer.parseInt(scan.nextLine()));
-        findIndexes();
         String command;
 
         while (!"end".equals(command = scan.nextLine())) {
@@ -73,16 +71,13 @@ public class BookWorm {
     }
     private static void readField(Scanner scan, int n) {
         field = new char[n][n];
-        IntStream.range(0, n).forEach(row -> field[row] = scan.nextLine().replaceAll("\\s+", "").toCharArray());
-    }
-    private static void findIndexes() {
-        for (int row = 0; row < field.length; row++) {
-            for (int col = 0; col < field.length; col++) {
-                if (field[row][col] == 'P') {
-                    playerRol = row;
-                    playerCol = col;
-                }
+        for (int i = 0; i < n; i++) {
+            String input = scan.nextLine();
+            if (input.contains("P")) {
+                playerRol = i;
+                playerCol = input.indexOf('P');
             }
+            field[i] = input.toCharArray();
         }
     }
 }
