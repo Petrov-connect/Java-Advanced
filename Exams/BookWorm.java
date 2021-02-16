@@ -2,6 +2,7 @@ package Exams;
 //created by J.M.
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class BookWorm {
 
@@ -70,13 +71,12 @@ public class BookWorm {
     }
     private static void readField(Scanner scan, int n) {
         field = new char[n][n];
-        for (int i = 0; i < n; i++) {
-            String input = scan.nextLine();
+        IntStream.range(0, n).forEach(i -> {  String input = scan.nextLine();
             if (input.contains("P")) {
                 playerRol = i;
                 playerCol = input.indexOf('P');
             }
             field[i] = input.toCharArray();
-        }
+        });
     }
 }
