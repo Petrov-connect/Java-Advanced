@@ -1,4 +1,4 @@
-package BasicAlgorithms.Quicksort;//created by J.M.
+package BasicAlgorithms.Quicksort;
 //created by J.M.
 
 import java.util.*;
