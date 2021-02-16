@@ -31,18 +31,12 @@ public class DatingApp {
             }
         }
         System.out.println("Matches: " + matchesCount);
-        if (males.isEmpty()) {
-            System.out.println("Males left: none");
-        } else {
-            System.out.printf("Males left: %s%n", males.stream().map(String::valueOf).collect(Collectors.joining(", ")));
-        }
-        if (females.isEmpty()) {
-            System.out.println("Females left: none");
-        } else {
-            System.out.printf("Females left: %s", females.stream().map(String::valueOf).collect(Collectors.joining(", ")));
-        }
-    }
+        System.out.println(males.isEmpty() ? "Males left: none"
+                : String.format("Males left: %s", males.stream().map(String::valueOf).collect(Collectors.joining(", "))));
+        System.out.println(females.isEmpty() ? "Females left: none"
+                : String.format("Females left: %s", females.stream().map(String::valueOf).collect(Collectors.joining(", "))));
 
+    }
     private static void extracted(ArrayDeque<Integer> collection) {
         if (collection.peek() <= 0) {
             collection.pop();
