@@ -84,7 +84,7 @@ public class Bee {
     }
 
     private static void printMatrix() {
-        Arrays.stream(matrix).map(row -> Arrays.toString(row).replaceAll("[\\[\\]]", "")
-                .replaceAll(", ", "")).forEach(System.out::println);
+        Arrays.stream(matrix).map(row -> Arrays.toString(row)
+                .replaceAll("[\\[\\], ]", "")).forEach(System.out::println);
     }
 }
