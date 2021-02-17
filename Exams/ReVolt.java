@@ -7,16 +7,14 @@ public class ReVolt {
 
     static char[][] matrix;
     static int[] currentPosition;
-    static boolean isFinished;
+    static boolean isFinished=false;
 
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
         int sizeMatrix = Integer.parseInt(scan.nextLine());
         int countCommands = Integer.parseInt(scan.nextLine());
-        matrix = readMatrix(scan, sizeMatrix);
-        currentPosition = findIndexes(matrix);
-        isFinished = false;
+        readMatrix(scan, sizeMatrix);
 
         while (countCommands-- > 0 && !isFinished) {
             matrix[currentPosition[0]][currentPosition[1]] = '-';
@@ -49,58 +47,43 @@ public class ReVolt {
     }
 
     private static void checkMove(String command) {
-        switch (command) {
-            case "up":
-                currentPosition[0]--;
-                if (currentPosition[0] < 0) {
-                    currentPosition[0] = matrix.length - 1;
-                }
-                break;
-            case "down":
-                currentPosition[0]++;
-                if (currentPosition[0] > matrix.length - 1) {
-                    currentPosition[0] = 0;
-                }
-                break;
-            case "left":
-                currentPosition[1]--;
-                if (currentPosition[1] < 0) {
-                    currentPosition[1] = matrix.length - 1;
-                }
-                break;
-            case "right":
-                currentPosition[1]++;
-                if (currentPosition[1] > matrix.length - 1) {
-                    currentPosition[1] = 0;
-                }
-                break;
-        }
-    }
-
-    private static int[] findIndexes(char[][] matrix) {
-        int[] indexes = new int[2];
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                if (matrix[i][j] == 'f') {
-                    indexes[0] = i;
-                    indexes[1] = j;
-                }
+        if ("up".equals(command)) {
+            currentPosition[0]--;
+            if (currentPosition[0] < 0) {
+                currentPosition[0] = matrix.length - 1;
+            }
+        } else if ("down".equals(command)) {
+            currentPosition[0]++;
+            if (currentPosition[0] > matrix.length - 1) {
+                currentPosition[0] = 0;
+            }
+        } else if ("left".equals(command)) {
+            currentPosition[1]--;
+            if (currentPosition[1] < 0) {
+                currentPosition[1] = matrix.length - 1;
+            }
+        } else if ("right".equals(command)) {
+            currentPosition[1]++;
+            if (currentPosition[1] > matrix.length - 1) {
+                currentPosition[1] = 0;
             }
         }
-        return indexes;
     }
 
-    private static char[][] readMatrix(Scanner scan, int size) {
-        char[][] matrix = new char[size][size];
+    private static void readMatrix(Scanner scan, int size) {
+        matrix = new char[size][size];
         for (int row = 0; row < matrix.length; row++) {
-            matrix[row] = scan.nextLine()
-                    .replaceAll("\\s+", "").toCharArray();
+            String input = scan.nextLine();
+            matrix[row] = input.toCharArray();
+            if (input.contains("B")) {
+                currentPosition[0] = row;
+                currentPosition[1] = input.indexOf('B');
+            }
         }
-        return matrix;
     }
 
     private static void printMatrix(char[][] matrix) {
-        Arrays.stream(matrix).map(row -> Arrays.toString(row).replaceAll("[\\[\\]]", "")
-                .replaceAll(", ", "")).forEach(System.out::println);
+        Arrays.stream(matrix).map(row -> Arrays.toString(row)
+                .replaceAll("[\\[\\], ]", "")).forEach(System.out::println);
     }
 }
