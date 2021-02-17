@@ -41,18 +41,10 @@ public class RadioactiveMutantVampireBunnies {
                 }
             } else if (move == 'L') {
                 currentPlayerCol--;
-                if (currentPlayerCol < 0) {
-                    inTheLiarBoard = false;
-                } else {
-                    checkMatrixCol(currentPlayerRow, currentPlayerCol);
-                }
+                inTheLiarBoard = currentPlayerCol >= 0 && checkMatrixCol(currentPlayerRow, currentPlayerCol);
             } else if (move == 'R') {
                 currentPlayerCol++;
-                if (currentPlayerCol >= lairBoard[0].length) {
-                    inTheLiarBoard = false;
-                } else {
-                    checkMatrixCol(currentPlayerRow, currentPlayerCol);
-                }
+                inTheLiarBoard = currentPlayerCol < lairBoard[0].length && checkMatrixCol(currentPlayerRow, currentPlayerCol);
             }
             fillTheBunnies();
             currentMove++;
@@ -67,7 +59,7 @@ public class RadioactiveMutantVampireBunnies {
         }
     }
 
-    private static void checkMatrixCol(int currentPlayerRow, int currentPlayerCol) {
+    private static boolean checkMatrixCol(int currentPlayerRow, int currentPlayerCol) {
         if (lairBoard[currentPlayerRow][currentPlayerCol] == 'B') {
             isAlive = false;
             playerPosition[1] = currentPlayerCol;
@@ -75,6 +67,7 @@ public class RadioactiveMutantVampireBunnies {
             playerPosition[1] = currentPlayerCol;
             newLiarBoard[playerPosition[0]][playerPosition[1]] = 'P';
         }
+        return true;
     }
 
     private static void checkMatrixRow(int currentPlayerRow, int currentPlayerCol) {
