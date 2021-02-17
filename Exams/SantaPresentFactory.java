@@ -17,6 +17,7 @@ public class SantaPresentFactory {
         Map<String, Integer> presents = new TreeMap<>();
 
         while (!materials.isEmpty() && !magic.isEmpty()) {
+
             int materialsValue = materials.peek();
             int magicValue = magic.peek();
             if (materialsValue != 0 && magicValue != 0) {
