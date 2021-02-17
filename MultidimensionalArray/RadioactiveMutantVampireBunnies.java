@@ -5,18 +5,16 @@ import java.util.*;
 
 public class RadioactiveMutantVampireBunnies {
 
-    private static boolean isAlive;
-    private static int[] playerPosition;
+    private static boolean isAlive = true;
     private static char[][] lairBoard;
     private static char[][] newLiarBoard;
+    private static final int[] playerPosition = new int[2];
 
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
-        lairBoard = readMatrix(scan);
-        playerPosition = foundPlayersStartIndexes(lairBoard);
+        readMatrix(scan);
         char[] moves = scan.nextLine().toCharArray();
-        isAlive = true;
         boolean inTheLiarBoard = true;
         int currentMove = 0;
 
@@ -89,31 +87,22 @@ public class RadioactiveMutantVampireBunnies {
         }
     }
 
-    private static char[][] readMatrix(Scanner scan) {
+    private static void readMatrix(Scanner scan) {
         int[] size = Arrays.stream(scan.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
-        char[][] matrix = new char[size[0]][size[1]];
-        for (int row = 0; row < matrix.length; row++) {
-            matrix[row] = scan.nextLine().toCharArray();
+        lairBoard = new char[size[0]][size[1]];
+        for (int row = 0; row < lairBoard.length; row++) {
+            String input = scan.nextLine();
+            lairBoard[row] = input.toCharArray();
+            if (input.contains("P")) {
+                playerPosition[0] = row;
+                playerPosition[1] = input.indexOf('P');
+            }
         }
-        return matrix;
     }
 
     private static void printMatrix(char[][] matrix) {
-        Arrays.stream(matrix).map(row -> Arrays.toString(row).replaceAll("[\\[\\]]", "")
-                .replaceAll(", ", "")).forEach(System.out::println);
-    }
-
-    private static int[] foundPlayersStartIndexes(char[][] lairBoard) {
-        int[] playersStartIndexes = new int[2];
-        for (int i = 0; i < lairBoard.length; i++) {
-            for (int j = 0; j < lairBoard[0].length; j++) {
-                if (lairBoard[i][j] == 'P') {
-                    playersStartIndexes[0] = i;
-                    playersStartIndexes[1] = j;
-                }
-            }
-        }
-        return playersStartIndexes;
+        Arrays.stream(matrix).map(row -> Arrays.toString(row)
+                .replaceAll("[\\[\\], ]", "")).forEach(System.out::println);
     }
 
     private static void fillTheBunnies() {
@@ -122,27 +111,19 @@ public class RadioactiveMutantVampireBunnies {
                 if (lairBoard[i][j] == 'B') {
                     newLiarBoard[i][j] = 'B';
                     if (i - 1 >= 0) {
-                        if (newLiarBoard[i - 1][j] == 'P') {
-                            isAlive = false;
-                        }
+                        checkIsALive(i - 1, j);
                         newLiarBoard[i - 1][j] = 'B';
                     }
                     if (i + 1 < lairBoard.length) {
-                        if (newLiarBoard[i + 1][j] == 'P') {
-                            isAlive = false;
-                        }
+                        checkIsALive(i + 1, j);
                         newLiarBoard[i + 1][j] = 'B';
                     }
                     if (j - 1 >= 0) {
-                        if (newLiarBoard[i][j - 1] == 'P') {
-                            isAlive = false;
-                        }
+                        checkIsALive(i, j - 1);
                         newLiarBoard[i][j - 1] = 'B';
                     }
                     if (j + 1 < lairBoard[0].length) {
-                        if (newLiarBoard[i][j + 1] == 'P') {
-                            isAlive = false;
-                        }
+                        checkIsALive(i, j + 1);
                         newLiarBoard[i][j + 1] = 'B';
                     }
                 } else if (newLiarBoard[i][j] != 'P' && newLiarBoard[i][j] != 'B') {
@@ -151,5 +132,11 @@ public class RadioactiveMutantVampireBunnies {
             }
         }
         lairBoard = newLiarBoard;
+    }
+
+    private static void checkIsALive(int row, int col) {
+        if (newLiarBoard[row][col] == 'P') {
+            isAlive = false;
+        }
     }
 }
