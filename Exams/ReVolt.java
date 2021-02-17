@@ -6,7 +6,7 @@ import java.util.*;
 public class ReVolt {
 
     static char[][] matrix;
-    static int[] currentPosition;
+    static int[] currentPosition = new int[2];
     static boolean isFinished=false;
 
     public static void main(String[] args) {
@@ -75,9 +75,9 @@ public class ReVolt {
         for (int row = 0; row < matrix.length; row++) {
             String input = scan.nextLine();
             matrix[row] = input.toCharArray();
-            if (input.contains("B")) {
+            if (input.contains("f")) {
                 currentPosition[0] = row;
-                currentPosition[1] = input.indexOf('B');
+                currentPosition[1] = input.indexOf('f');
             }
         }
     }
