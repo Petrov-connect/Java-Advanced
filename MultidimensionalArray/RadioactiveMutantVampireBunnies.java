@@ -19,12 +19,14 @@ public class RadioactiveMutantVampireBunnies {
         int currentMove = 0;
 
         while (isAlive && inTheLiarBoard) {
+
             char move = moves[currentMove];
             int currentPlayerRow = playerPosition[0];
             int currentPlayerCol = playerPosition[1];
             newLiarBoard = new char[lairBoard.length][lairBoard[0].length];
             lairBoard[playerPosition[0]][playerPosition[1]] = '.';
             newLiarBoard[playerPosition[0]][playerPosition[1]] = '.';
+
             if (move == 'U') {
                 currentPlayerRow--;
                 inTheLiarBoard = currentPlayerRow >= 0 && checkMatrixRow(currentPlayerRow, currentPlayerCol);
