@@ -13,11 +13,7 @@ public class TheGarden {
 
         Scanner scan = new Scanner(System.in);
         readMatrix(scan, Integer.parseInt(scan.nextLine()));
-        vegetables = new LinkedHashMap<>() {{
-            put("Carrots", 0);
-            put("Potatoes",0);
-            put("Lettuce", 0);
-        }};
+        vegetables = new LinkedHashMap<>() {{ put("Carrots", 0); put("Potatoes",0); put("Lettuce", 0);}};
         String input;
         int row, col;
 
