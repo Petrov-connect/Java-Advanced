@@ -58,6 +58,19 @@ public class PresentDelivery {
         }
     }
 
+    private static void printMatrix() {
+        Arrays.stream(neighbourhood).map(row -> Arrays.toString(row).replaceAll("[\\[\\]]", "")
+                .replaceAll(", ", " ")).forEach(System.out::println);
+    }
+    private static boolean isInBounds(int row, int col) {
+        return row < neighbourhood.length && row >= 0 && col < neighbourhood.length && col >= 0;
+    }
+    private static void readMatrix(Scanner scan, int n) {
+        neighbourhood = new char[n][n];
+        for (int row = 0; row < n; row++) {
+            neighbourhood[row] = scan.nextLine().replaceAll("\\s+", "").toCharArray();
+        }
+    }
     private static void checkPosition(int i, int j) {
         if (neighbourhood[i][j] == 'V' || neighbourhood[i][j] == 'X') {
             presents--;
@@ -65,7 +78,6 @@ public class PresentDelivery {
         }
         neighbourhood[i][j] = '-';
     }
-
     private static void findSymbol() {
         niceKidsLeft = 0;
         for (int row = 0; row < neighbourhood.length; row++) {
@@ -77,22 +89,6 @@ public class PresentDelivery {
                     colIndex = col;
                 }
             }
-        }
-    }
-
-    private static void printMatrix() {
-        Arrays.stream(neighbourhood).map(row -> Arrays.toString(row).replaceAll("[\\[\\]]", "")
-                .replaceAll(", ", " ")).forEach(System.out::println);
-    }
-
-    private static boolean isInBounds(int row, int col) {
-        return row < neighbourhood.length && row >= 0 && col < neighbourhood.length && col >= 0;
-    }
-
-    private static void readMatrix(Scanner scan, int n) {
-        neighbourhood = new char[n][n];
-        for (int row = 0; row < n; row++) {
-            neighbourhood[row] = scan.nextLine().replaceAll("\\s+", "").toCharArray();
         }
     }
 }
