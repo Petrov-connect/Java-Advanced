@@ -16,7 +16,7 @@ public class PresentDelivery {
 
         Scanner scan = new Scanner(System.in);
         presents = Integer.parseInt(scan.nextLine());
-        neighbourhood = readMatrix(scan, Integer.parseInt(scan.nextLine()));
+        readMatrix(scan, Integer.parseInt(scan.nextLine()));
         findSymbol();
         String command;
 
@@ -89,12 +89,11 @@ public class PresentDelivery {
         return row < neighbourhood.length && row >= 0 && col < neighbourhood.length && col >= 0;
     }
 
-    private static char[][] readMatrix(Scanner scan, int n) {
-        char[][] matrix = new char[n][n];
+    private static void readMatrix(Scanner scan, int n) {
+        neighbourhood = new char[n][n];
         for (int row = 0; row < n; row++) {
-            matrix[row] = scan.nextLine().replaceAll("\\s+", "").toCharArray();
+            neighbourhood[row] = scan.nextLine().replaceAll("\\s+", "").toCharArray();
         }
-        return matrix;
     }
 }
 
