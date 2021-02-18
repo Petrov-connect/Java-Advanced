@@ -2,7 +2,6 @@ package Exams;
 //created by J.M.
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class PresentDelivery {
     private static int rowIndex;
@@ -21,7 +20,7 @@ public class PresentDelivery {
         findSymbol();
         String command;
 
-        while (!"Christmas morning".equals(command = scan.nextLine())) {
+        while ((isInBounds(rowIndex, colIndex) && presents > 0) && !"Christmas morning".equals(command = scan.nextLine())) {
             neighbourhood[rowIndex][colIndex] = '-';
             if ("up".equals(command)) {
                 rowIndex--;
@@ -45,9 +44,6 @@ public class PresentDelivery {
                 }
                 neighbourhood[rowIndex][colIndex] = 'S';
             }
-            if (!isInBounds(rowIndex, colIndex) || presents <= 0) {
-                break;
-            }
         }
         if (!isInBounds(rowIndex, colIndex) || (presents <= 0 && currentChar != 'C')) {
             System.out.println("Santa ran out of presents!");
@@ -61,6 +57,7 @@ public class PresentDelivery {
             System.out.printf("Good job, Santa! %d happy nice kid/s.", countHappyKids);
         }
     }
+
     private static void checkPosition(int i, int j) {
         if (neighbourhood[i][j] == 'V' || neighbourhood[i][j] == 'X') {
             presents--;
@@ -68,6 +65,7 @@ public class PresentDelivery {
         }
         neighbourhood[i][j] = '-';
     }
+
     private static void findSymbol() {
         niceKidsLeft = 0;
         for (int row = 0; row < neighbourhood.length; row++) {
@@ -81,15 +79,16 @@ public class PresentDelivery {
             }
         }
     }
+
     private static void printMatrix() {
-        for (char[] current : neighbourhood) {
-            IntStream.range(0, current.length).forEach(j -> System.out.printf("%c ", current[j]));
-            System.out.println();
-        }
+        Arrays.stream(neighbourhood).map(row -> Arrays.toString(row).replaceAll("[\\[\\]]", "")
+                .replaceAll(", ", " ")).forEach(System.out::println);
     }
+
     private static boolean isInBounds(int row, int col) {
         return row < neighbourhood.length && row >= 0 && col < neighbourhood.length && col >= 0;
     }
+
     private static char[][] readMatrix(Scanner scan, int n) {
         char[][] matrix = new char[n][n];
         for (int row = 0; row < n; row++) {
