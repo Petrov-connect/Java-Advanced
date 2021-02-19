@@ -9,6 +9,7 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
         int[] array = mergeSort(Arrays.stream(scan.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray());
+
         Arrays.stream(array).forEach(i -> System.out.printf("%d ", i));
     }
 
@@ -18,6 +19,7 @@ public class Main {
             return array;
         }
         int halfIndex = array.length / 2;
+
         int[] firstPartition = Arrays.copyOfRange(array, 0, halfIndex);
         int[] secondPartition = Arrays.copyOfRange(array, halfIndex, array.length);
 
