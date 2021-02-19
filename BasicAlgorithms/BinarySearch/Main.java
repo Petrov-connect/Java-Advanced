@@ -15,7 +15,9 @@ public class Main {
     }
 
     private static int binarySearch(int[] numbers, int target) {
+
         int start = 0, end = numbers.length - 1;
+
         while (end >= start) {
             int half = (start + end) / 2;
             if (numbers[half] < target) {
