@@ -10,6 +10,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         int[] numbers = Arrays.stream(scan.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
         int target = Integer.parseInt(scan.nextLine());
+
         System.out.println(binarySearch(numbers, target));
     }
 
