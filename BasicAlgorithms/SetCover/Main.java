@@ -15,6 +15,7 @@ public class Main {
         int[] universe = Arrays.stream(reader.readLine().substring(10).split(", ")).mapToInt(Integer::parseInt).toArray();
         int numberOfSets = Integer.parseInt(reader.readLine().substring(16));
         List<int[]> sets = new ArrayList<>();
+
         for (int i = 0; i < numberOfSets; i++) {
             String[] setElements = reader.readLine().split(", ");
             int[] set = new int[setElements.length];
