@@ -12,7 +12,9 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
         int[] coins = Arrays.stream(scan.nextLine().substring(7).trim().split(", ")).mapToInt(Integer::parseInt).toArray();
+
         Map<Integer, Integer> usedCoins = chooseCoins(coins,Integer.parseInt(scan.nextLine().substring(5).trim()));
+
         if (targetSum > 0) {
             System.out.println("Error");
         } else {
@@ -22,10 +24,12 @@ public class Main {
     }
 
     public static Map<Integer, Integer> chooseCoins(int[] coins, int sum) {
+
         targetSum = sum;
         List<Integer> sortedCoins = Arrays.stream(coins).boxed().sorted(Collections.reverseOrder()).collect(Collectors.toList());
         Map<Integer, Integer> usedCoins = new LinkedHashMap<>();
         int index = 0;
+
         while (targetSum > 0 && index < sortedCoins.size()) {
             if (targetSum / sortedCoins.get(index) > 0) {
                 usedCoins.put(sortedCoins.get(index), targetSum / sortedCoins.get(index));
