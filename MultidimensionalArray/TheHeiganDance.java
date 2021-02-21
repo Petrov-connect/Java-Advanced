@@ -52,6 +52,7 @@ public class TheHeiganDance {
             previousRowHit = rowHit; previousColHit = colHit; previousSpell = spell;
         }
         spell = "Cloud".equals(spell) ? "Plague Cloud" : spell;
+
         if (bossLife <= 0) {
             System.out.printf("Heigan: Defeated!%n");
         } else {
