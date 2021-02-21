@@ -22,7 +22,6 @@ public class Main {
 
         int n = Integer.parseInt(scan.nextLine());
         Person findPerson = personInfo.get(n - 1);
-
         long equals = personInfo.stream().filter(e -> findPerson.compareTo(e) == 0).count();
 
         if (equals == 1) {
