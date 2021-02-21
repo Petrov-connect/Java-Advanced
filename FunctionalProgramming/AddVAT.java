@@ -14,6 +14,7 @@ public class AddVAT {
         String values = Arrays.stream(scan.nextLine().split(", "))
                 .map(e -> String.format("%.2f", vatAdder.apply(Double.parseDouble(e))))
                 .collect(Collectors.joining(System.lineSeparator()));
+
         System.out.printf("Prices with VAT:%n%s",values);
     }
 }
