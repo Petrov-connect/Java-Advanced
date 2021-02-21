@@ -16,6 +16,7 @@ public class AppliedArithmetic {
         Function<int[],int[]>subtractOne=array->Arrays.stream(array).map(n->n-=1).toArray();
         Consumer<int[]>print=array->Arrays.stream(array).forEach(e-> System.out.printf("%d ",e));
         String command;
+
         while (!"end".equals(command=scan.nextLine())){
             switch (command){
                 case "add": numbers=addOne.apply(numbers); break;
