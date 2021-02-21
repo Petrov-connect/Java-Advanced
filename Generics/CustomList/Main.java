@@ -10,6 +10,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         String input;
         CustomBox<String> box = new CustomBox<>();
+
         while (!"END".equals(input = scan.nextLine())) {
             String[] command = input.split("\\s+");
             switch (command[0]) {
