@@ -9,7 +9,6 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
         int[] array = mergeSort(Arrays.stream(scan.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray());
-
         Arrays.stream(array).forEach(i -> System.out.printf("%d ", i));
     }
 
