@@ -29,6 +29,7 @@ public class Main {
             Employee data = new Employee(input[0], Double.parseDouble(input[1]), input[3], email, age);
             employeeList.add(data);
         }
+
         List<String> departmentNames = employeeList.stream().map(Employee::getDepartment).distinct().collect(Collectors.toList());
         List<Department> departments = departmentNames.stream().map(department -> new Department(department,
                 employeeList.stream().filter(employee -> employee.getDepartment().equals(department)).collect(Collectors.toList())))
