@@ -16,6 +16,7 @@ public class AcademyGraduation {
         IntStream.range(0, numberOfStudents).mapToObj(i -> scan.nextLine())
                 .forEach(name -> graduationList.put(name, Arrays.stream(scan.nextLine().split("\\s+"))
                 .map(Double::parseDouble).collect(Collectors.toList())));
+
         graduationList.forEach((k, v) -> System.out.printf("%s is graduated with %s%n", k, getAverage(v)));
     }
 
