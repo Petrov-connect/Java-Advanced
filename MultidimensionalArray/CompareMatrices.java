@@ -25,6 +25,7 @@ public class CompareMatrices {
                 }
             }
             for (int row = 0; row < firstMatrix.length; row++) {
+
                 int[] currentFirst = firstMatrix[row];
                 int[] currentSecond = secondMatrix[row];
                 for (int col = 0; col < currentFirst.length; col++) {
