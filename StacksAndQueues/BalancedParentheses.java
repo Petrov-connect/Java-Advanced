@@ -13,6 +13,7 @@ public class BalancedParentheses {
         boolean isBalanced=true;
 
         for (int i = 0; i < input.length(); i++) {
+
             char current=input.charAt(i);
             if(current=='{'||current=='['||current=='('){
                 openParentheses.push(current);
