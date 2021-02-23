@@ -15,6 +15,7 @@ public class CopyBytes {
         PrintWriter writer = new PrintWriter(outputStream);
 
         int singleByte;
+
         while ((singleByte = inputStream.read()) >= 0) {
             char symbol= (char)singleByte;
             if(singleByte==10||singleByte==32){
