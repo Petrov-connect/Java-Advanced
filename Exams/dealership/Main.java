@@ -4,6 +4,7 @@ package Exams.dealership;
 public class Main {
 
     public static void main(String[] args) {
+
 // Initialize the repository
         Dealership dealership = new Dealership("Autofest", 5);
 
