@@ -1,4 +1,4 @@
-package Exams.Parking;
+package Exams.parking;
 //created by J.M.
 
 import java.util.*;
