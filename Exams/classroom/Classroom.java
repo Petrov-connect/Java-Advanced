@@ -1,4 +1,4 @@
-package Exams.Classroom;
+package Exams.classroom;
 //created by J.M.
 
 import java.util.*;

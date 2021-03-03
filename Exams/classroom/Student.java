@@ -1,4 +1,4 @@
-package Exams.Classroom;
+package Exams.classroom;
 
 public class Student {
 
