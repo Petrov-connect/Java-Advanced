@@ -6,7 +6,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         // Initialize the repository
         Bag bag = new Bag("black", 10);
 
