@@ -1,4 +1,4 @@
-package Exams.Rabbits;
+package Exams.rabbits;
 
 public class Main {
 

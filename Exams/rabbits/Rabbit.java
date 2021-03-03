@@ -1,4 +1,4 @@
-package Exams.Rabbits;
+package Exams.rabbits;
 //created by J.M.
 
 public class Rabbit {
