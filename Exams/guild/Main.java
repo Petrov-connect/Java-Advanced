@@ -1,4 +1,4 @@
-package guild;
+package Exams.guild;
 //created by J.M.
 
 public class Main {
